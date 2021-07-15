@@ -12,16 +12,21 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 @EnableWebSecurity
 public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
-			.anyRequest().authenticated()
+			/*.anyRequest().authenticated()*/
+		.antMatchers("/").hasRole("EMPLOYEE")
+		.antMatchers("/leaders/**").hasRole("ADMIN")
+		.antMatchers("/systems/**").hasAnyRole("MANAGER", "ADMIN")
 			.and()
 				.formLogin()
 					.loginPage("/showMyLogin")
-					.loginProcessingUrl("/processLogin")
-					.permitAll();
+					.loginProcessingUrl("/processLogin").permitAll()
+				.and()
+					.logout().permitAll();
 	}
 
 	@Override
@@ -32,9 +37,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		UserBuilder builder = User.withDefaultPasswordEncoder();
 		
 		auth.inMemoryAuthentication()
-			.withUser(builder.username("sepehr").password("1234").roles("EMPLOYEE"))
-			.withUser(builder.username("parham").password("1234").roles("MANAGER"))
-			.withUser(builder.username("ahmad").password("1234").roles("ADMIN"));
+			.withUser(builder.username("sepehr").password("1234").roles("EMPLOYEE", "ADMIN"))
+			.withUser(builder.username("parham").password("1234").roles("MANAGER", "EMPLOYEE"))
+			.withUser(builder.username("ahmad").password("1234").roles("EMPLOYEE"));
 	}
 	
 	

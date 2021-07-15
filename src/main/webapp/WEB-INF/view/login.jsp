@@ -12,13 +12,15 @@
 	
 	<h3>My custom login</h3>
 	
-	<form:form action="${pageContext.request.contextPath }/processLogin">
+	<!-- For csrf you can use spring form tags or add csrf input -->
+	
+	<form action="${pageContext.request.contextPath }/processLogin">
 	
 	
 	<%
 		//if(request.getParameter("error") != null){
 	%>
-	<!--  <i>Sorry! you entered wrong username or password error = <%=request.getParameter("error") %> </i>-->
+	<!--  <i>Sorry! you entered wrong username or password error  </i>-->
 	<%
 		//}
 	%>
@@ -37,7 +39,11 @@
 		</p>
 		
 		<input type="submit" value="login"/>
-	</form:form>
+		
+		 <input type="hidden" name="${_csrf.parrameterName}" 
+		value="${_csrf.tokkn}" /> 
+		
+	</form>
 	
 </body>
 </html>
