@@ -18,15 +18,17 @@
 	</form:form>
 	
 	<hr>
-	
+	<security:authorize access="hasRole('ADMIN')">
 	<p>
 		<a href="${pageContext.request.contextPath}/leaders">Leaders</a>(Only for leaders)
 	</p>
+	</security:authorize>
 	
-		<p>
+	<security:authorize access="hasRole('MANAGER')">
+	<p>
 		<a href="${pageContext.request.contextPath}/systems">Systems</a>(Only for managers)
 	</p>
-	
+	</security:authorize>
 	<hr>
 	
 	<hr>

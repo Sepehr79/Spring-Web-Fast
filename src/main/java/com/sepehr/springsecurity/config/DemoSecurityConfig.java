@@ -26,7 +26,9 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 					.loginPage("/showMyLogin")
 					.loginProcessingUrl("/processLogin").permitAll()
 				.and()
-					.logout().permitAll();
+					.logout().permitAll()
+				.and()
+					.exceptionHandling().accessDeniedPage("/accessDenied");
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
 		UserBuilder builder = User.withDefaultPasswordEncoder();
 		
 		auth.inMemoryAuthentication()
-			.withUser(builder.username("sepehr").password("1234").roles("EMPLOYEE", "ADMIN"))
+			.withUser(builder.username("sepehr").password("1234").roles("EMPLOYEE", "ADMIN", "MANAGER"))
 			.withUser(builder.username("parham").password("1234").roles("MANAGER", "EMPLOYEE"))
 			.withUser(builder.username("ahmad").password("1234").roles("EMPLOYEE"));
 	}
