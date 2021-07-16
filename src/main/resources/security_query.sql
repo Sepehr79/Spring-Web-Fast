@@ -7,15 +7,15 @@ use security_test;
 DROP TABLE if EXISTS users;
 create table users(
   	username varchar(50) not null,
-    password varchar(50) not null,
-    enable tinyint(1) NOT null,
+    password varchar(68) not null,
+    enabled tinyint(1) NOT null,
     PRIMARY KEY(username)
 );
 
 INSERT into users VALUES  
-('john', '{noop}test123', 1),
-('mary', '{noop}test123', 1),
-('susan', '{noop}test123', 1);
+('john', '{bcrypt}$2a$10$s3E9hA7aibglpg6nBooOK.0sH0RzoTDi0WmfwLH1QLTUgYZCwUaQq', 1),
+('mary', '{bcrypt}$2a$10$s3E9hA7aibglpg6nBooOK.0sH0RzoTDi0WmfwLH1QLTUgYZCwUaQq', 1),
+('susan', '{bcrypt}$2a$10$s3E9hA7aibglpg6nBooOK.0sH0RzoTDi0WmfwLH1QLTUgYZCwUaQq', 1);
 
 
 drop table if EXISTS authorities;
