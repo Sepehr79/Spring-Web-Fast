@@ -40,8 +40,8 @@
 		
 		<input type="submit" value="login"/>
 		
-		 <input type="hidden" name="${_csrf.parrameterName}" 
-		value="${_csrf.tokkn}" /> 
+		 <input type="hidden" name="${_csrf.parameterName}" 
+		value="${_csrf.token}" /> 
 		
 	</form>
 	
